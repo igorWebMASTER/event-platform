@@ -6,7 +6,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        blur: 'url(/src/assets/blur.png)'
+        blur: 'url(/src/assets/blur.png)',
+        atom: 'url(/src/assets/atom.svg)'
       },
       colors: {
         green: {
