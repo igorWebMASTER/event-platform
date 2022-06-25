@@ -3,13 +3,15 @@ import React from 'react'
 import { isPast, format } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 import { Link, useParams } from 'react-router-dom';
+import classNames from 'classnames'
+
 interface LessonProps {
     title: string;
     slug: string;
     availableAt: Date,
     type: 'live' | 'class'
 }
-import classNames from 'classnames'
+
 
 export function Lesson({ title, type, slug, availableAt }: LessonProps) {
     const isLessonAvailable = isPast(availableAt)
