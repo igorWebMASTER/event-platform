@@ -1,4 +1,5 @@
 import React, { FormEvent, useState } from 'react'
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../components/Logo'
 import { useCreateSubscriberMutation } from '../../graphql/generated';
@@ -10,16 +11,19 @@ export function Subscribe() {
     const [createSubscriber, { loading }] = useCreateSubscriberMutation()
 
     async function handleSubscribe(e: FormEvent) {
-        e.preventDefault();
+        try {
+            e.preventDefault();
 
-        await createSubscriber({
-            variables: {
-                name,
-                email
-            }
-        })
-
-        navigate('event')
+            await createSubscriber({
+                variables: {
+                    name,
+                    email
+                }
+            })
+            navigate('event')
+        } catch (error) {
+            toast.error('Não foi possivel realizar o cadastro')
+        }
     }
 
     return (
@@ -44,7 +48,7 @@ export function Subscribe() {
                         <input
                             className='bg-gray-900 rounded px-5 h-14'
                             type="text"
-                            placeholder='Digite seu nome completp'
+                            placeholder='Digite seu nome completo'
                             onChange={(e) => setName(e.target.value)}
                         />
                         <input

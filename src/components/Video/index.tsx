@@ -97,7 +97,6 @@ export function Video({ lessonSlug }: VideoProps) {
                             <CaretRight size={24} />
                         </div>
                     </a>
-
                     <a href=""></a>
                 </div>
 
