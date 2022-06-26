@@ -11,6 +11,7 @@ export function Subscribe() {
     const [createSubscriber, { loading }] = useCreateSubscriberMutation();
     const { data: lessonsData } = useGetLessonsQuery();
     const slug = lessonsData?.lessons?.[0]?.slug;
+
     async function handleSubscribe(e: FormEvent) {
         try {
             e.preventDefault();
@@ -69,7 +70,7 @@ export function Subscribe() {
                     </form>
                 </div>
             </div>
-            <img src="/src/assets/code-mocked.png" className='mt-10' alt="" />
+            <img src="../../src/assets/code-mocked.png" className='mt-10' alt="" />
         </div>
     )
 }
