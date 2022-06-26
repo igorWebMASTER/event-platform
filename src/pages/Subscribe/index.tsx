@@ -2,25 +2,26 @@ import React, { FormEvent, useState } from 'react'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../components/Logo'
-import { useCreateSubscriberMutation } from '../../graphql/generated';
+import { useCreateSubscriberMutation, useGetLessonsQuery } from '../../graphql/generated';
 
 export function Subscribe() {
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [createSubscriber, { loading }] = useCreateSubscriberMutation()
-
+    const [createSubscriber, { loading }] = useCreateSubscriberMutation();
+    const { data: lessonsData } = useGetLessonsQuery();
+    const slug = lessonsData?.lessons?.[0]?.slug;
     async function handleSubscribe(e: FormEvent) {
         try {
             e.preventDefault();
 
-            await createSubscriber({
+            const data = await createSubscriber({
                 variables: {
                     name,
                     email
                 }
             })
-            navigate('event')
+            navigate(`event/lesson/${slug}`)
         } catch (error) {
             toast.error('Não foi possivel realizar o cadastro')
         }
